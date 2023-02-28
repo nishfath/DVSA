@@ -23,7 +23,7 @@ jobs:
       run: |
         pip install --upgrade setuptools wheel
         pip install -r requirements.txt
-        ${GITHUB_WORKSPACE}/sl analyze --wait --app DVSA --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python $(pwd)
+        ${GITHUB_WORKSPACE}/sl analyze --wait --app shiftleft-python-demo --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python $(pwd)
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         
@@ -32,7 +32,7 @@ jobs:
     - name: Legacy Static Analysis
       run: |
         echo "Please update your `DVSA` fork!"
-        ${GITHUB_WORKSPACE}/sl analyze --wait --app DVSA --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python $(pwd)
+        ${GITHUB_WORKSPACE}/sl analyze --wait --app shiftleft-python-demo --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python $(pwd)
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         
@@ -48,7 +48,7 @@ jobs:
         curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl
     - name: Validate Build Rules
       run: |
-        ${GITHUB_WORKSPACE}/sl check-analysis --v2 --app DVSA --target tag.branch="release" \
+        ${GITHUB_WORKSPACE}/sl check-analysis --v2 --app shiftleft-python-demo --target tag.branch="release" \
             --report \
             --github-pr-number=${{github.event.number}} \
             --github-pr-user=${{ github.repository_owner }} \
